@@ -1,0 +1,152 @@
+Cruise,Date,Fixed_Station,Seq_Station,Gear,Net,Species,No_Fish,Time_Local,Probable Water Mass,Comments
+SKQ201713S,170830,2.2,5,Ring,Na,B.saida,8,,,
+SKQ201713S,170830,2.2,5,Tucker,0,B.saida,8,,,Net open on up and down; Net did not fire (TT Cast 1); no label in bag
+SKQ201713S,170830,2.2,5,Tucker,1,B.saida,2,,,Cast 2 on St5 
+SKQ201713S,170830,2.2,5,Tucker,3,B.saida,4,,,Cast 2 on St5 
+SKQ201713S,170830,2.4,7,Tucker,2,B.saida,6,,,
+SKQ201713S,170830,2.4,7,Tucker ,3,B.saida,4,,,
+SKQ201713S,170830,2.6,9,Tucker,2,B.saida,1,1540,,
+SKQ201713S,170830,2.6,9,Bongo,500,B.saida,2,,,very small
+SKQ201713S,170830,2.6,9,Bongo,150,B.saida,1,,,
+SKQ201713S,170830,2.8,11,Tucker,1,B.saida,2,,,
+SKQ201713S,170830,2.8,11,Tucker,2,B.saida,2,,,
+SKQ201713S,170830,2.8,11,Tucker,3,B.saida,1,,,
+SKQ201713S,170830,2.10,13,Tucker,1,B.saida,3,,,
+SKQ201713S,170830,2.10,13,Bongo,150,B.saida,3,,,
+SKQ201713S,170831,4.1,20,Bongo,500,B.saida,2,,,
+SKQ201713S,170831,4.1,20,Tucker,3,B.saida,5,,,
+SKQ201713S,170831,4.3,22,Tucker,1,B.saida,4,,,
+SKQ201713S,170831,4.3,22,Tucker,2,B.saida,1,,,
+SKQ201713S,170831,4.3,22,Tucker,3,B.saida,2,,,
+SKQ201713S,170831,4.3,22,Bongo,500,B.saida,2,,,
+SKQ201713S,170831,4.5,24,Tucker,3,B.saida,2,,,"Cast hit bottom, was re-done; no volume to line up with"
+SKQ201713S,170831,4.5,24,Bongo,150,B.saida,6,,,Stn 24 Bongo 150 & 500 in same bag
+SKQ201713S,170831,4.5,24,Bongo,500,B.saida,4,,,Stn 24 Bongo 150 & 500 in same bag
+SKQ201713S,170831,4.5,24,Tucker,1,B.saida,3,,,
+SKQ201713S,170831,4.5,24,Tucker,3,B.saida,7,,,
+SKQ201713S,170831,4.5,24,Tucker,2,B.saida,1,,,
+SKQ201713S,170831,4.7,26,Tucker,2,B.saida,20,,,
+SKQ201713S,170831,4.7,26,Tucker,3,B.saida,5,,,
+SKQ201713S,170831,4.7,26,Tucker,1,B.saida,1,,,55mm TL
+SKQ201713S,170831,4.7,26,Bongo,500,B.saida,5,,,
+SKQ201713S,170831,4.7,26,Bongo,150,B.saida,4,,,
+SKQ201713S,170901,2.2,37,Tucker,3,B.saida,2,,,
+SKQ201713S,170901,2.2,37,Bongo,500,B.saida,1,,,Stn 37 Bongo 150 & 500 in same bag
+SKQ201713S,170901,2.2,37,Bongo,150,B.saida,1,,,Stn 37 Bongo 150 & 500 in same bag
+SKQ201713S,170901,2.4,39,Bongo,500,B.saida,2,,,
+SKQ201713S,,2..4,39,Tucker,1,B.saida,1,,,
+SKQ201713S,,2.4,39,Tucker,3,B.saida,5,,,
+SKQ201713S,,2.4,39,Tucker,2,B.saida,0,,,"1 fish removed, examined, and discarded"
+SKQ201713S,,2.6,42,Tucker,2,B.saida,1,,,
+SKQ201713S,,2.6,42,Bongo,150,B.saida,1,,,
+SKQ201713S,,2.6,42,Bongo,500,B.saida,2,,,
+SKQ201713S,,2.8,44,Tucker,1,B.saida,52,,,One net for complete to-yo
+SKQ201713S,,2.8,44,Bongo,500,B.saida,2,,,
+SKQ201713S,,2.10,46,Tucker,1,B.saida,40,,,
+SKQ201713S,,2.10,46,Bongo,500,B.saida,11,,,
+SKQ201713S,,2.10,46,Bongo,150,B.saida,1,,,
+SKQ201713S,,3.4,51,Tucker,3,B.saida,4,,,sample label says Fixed Stn 4.5
+SKQ201713S,,2.2,53,Tucker,3,B.saida,4,,,
+SKQ201713S,,2.2,53,Bongo,500,B.saida,1,,,
+SKQ201713S,,2.4,55,Bongo,500,B.saida,3,,,
+SKQ201713S,,2.4,55,Bongo,150,B.saida,6,,,
+SKQ201713S,,2.4,55,Tucker,1,B.saida,1,,,
+SKQ201713S,,2.4,55,Tucker,3,B.saida,7,,,
+SKQ201713S,,2.6,58,Tucker,2,B.saida,6,,,
+SKQ201713S,,2.8,60,Tucker,3,B.saida,8,,,Don't use for RNA/DNA
+SKQ201713S,,2.10,62,Bongo,500,B.saida,3,,,Stn 2.10 Bongo 150 & 500 in same bag
+SKQ201713S,,2.10,62,Bongo,150,B.saida,1,,,Stn 2.10 Bongo 150 & 500 in same bag
+SKQ201713S,,3.4,64,Tucker,3,B.saida,6,,,Stn 64 Tucker N3 and N2 in same bag
+SKQ201713S,,3.4,64,Tucker,2,B.saida,1,,,Stn 64 Tucker N3 and N2 in same bag
+SKQ201713S,,2.2,72,Tucker,2,B.saida,1,,,
+SKQ201713S,,2.2,72,Tucker,3,B.saida,3,,,
+SKQ201713S,,2.2,72,Bongo,500,B.saida,3,,,
+SKQ201713S,,2.2,72,Bongo,150,B.saida,1,,,
+SKQ201713S,,2.3,74,Tucker,3,B.saida,4,,,
+SKQ201713S,,2.4,75,Tucker,3,B.saida,12,,,
+SKQ201713S,,2.4,75,Tucker,1,B.saida,3,,,
+SKQ201713S,,2.4,75,Bongo,150,B.saida,3,,,
+SKQ201713S,,2.3,74,Tucker,2,B.saida,4,,,
+SKQ201713S,,2.6,78,Tucker,1,B.saida,4,,,
+SKQ201713S,,2.6,78,Tucker,3,B.saida,9,,,
+SKQ201713S,,2.8,80,Tucker,1,B.saida,12,,,
+SKQ201713S,,2.8,80,Tucker,3,B.saida,28,,,Don't use for RNA/DNA
+SKQ201713S,,28,80,Tucker,2,B.saida,3,,,
+SKQ201713S,,2.8,80,Bongo,150,B.saida,8,,,
+SKQ201713S,,2.8,80,Bongo,500,B.saida,10,,,
+SKQ201713S,,2.10,82,Bongo,500,B.saida,23,,,
+SKQ201713S,,2.10,82,Bongo,150,B.saida,14,,,
+SKQ201713S,,2.10,82,Tucker,1,B.saida,28,,,
+SKQ201713S,,4.4,83,Tucker,1,B.saida,1,,,"Label might say fixed stn ""Fish Tr"""
+SKQ201713S,,4.4,83,Tucker,3,B.saida,7,,,"plus 1 (polar cod?); label might say fixed stn ""Fish Tr"""
+SKQ201713S,,4.4,86,Tucker,1,,1,,,(polar?)
+SKQ201713S,,4.4,86,Bongo,500,B.saida,1,,,
+SKQ201713S,,4.5,87,Tucker,1,B.saida,1,,,
+SKQ201713S,,4.5,87,Tucker,3,B.saida,2,,,Label says N=1; added tiny 2nd fish to bag w/out adjusting label
+SKQ201713S,,4.6,89,Tucker,1,B.saida,3,,,
+SKQ201713S,,4.6,89,Tucker,2,B.saida,7,,,
+SKQ201713S,,4.6,89,Tucker,3,B.saida,8,,,
+SKQ201713S,,4.6,89,Bongo,500,B.saida,1,,,
+SKQ201713S,,4.6,89,Bongo,150,B.saida,2,,,
+SKQ201713S,,4.8,91,Tucker,1,B.saida,16,,,only 1 net
+SKQ201713S,,4.10,93,Tucker,1,B.saida,9,,,only 1 net
+SKQ201713S,,5.2,128,Tucker,1,B.saida,1,,,
+SKQ201713S,,5.2,128,Tucker,3,B.saida,4,,,
+SKQ201713S,,5.45,131,Tucker,?,B.saida,5,,,"sheet says net 5, but there's no net 5; check bag label, maybe net 3?"
+SKQ201713S,,5.45,131,Bongo,500,B.saida,1,,,
+SKQ201713S,,5.6,133,Bongo,500,B.saida,1,,,
+SKQ201713S,,5.6,133,Tucker,3,B.saida,2,,,
+SKQ201713S,,5.8,135,Tucker,3,B.saida,10,,,
+SKQ201713S,,5.8,135,Bongo,500,B.saida,3,,,Stn 135 Bongo 150 & 500 in same bag
+SKQ201713S,,5.8,135,Bongo,150,B.saida,2,,,Stn 135 Bongo 150 & 500 in same bag
+SKQ201713S,,5.10,137,Bongo,500,B.saida,3,,,Stn 137 Bongo 150 & 500 in same bag
+SKQ201713S,,5.10,137,Bongo,150,B.saida,1,,,Stn 137 Bongo 150 & 500 in same bag
+SKQ201713S,,5.10,137,Tucker,3,B.saida,17,,,only 1 net
+SKQ201713S,,2.10,138,Tucker,3,B.saida,83,,,only 1 net
+SKQ201713S,,2.8,140,Tucker,1,B.saida,23,,,label says 22; added 1 more w/out updating label
+SKQ201713S,,2.8,140,Tucker,3,B.saida,20,,,
+SKQ201713S,,2.6,142,Tucker,3,B.saida,15,,,
+SKQ201713S,,2.6,142,Tucker,1,B.saida,3,,,
+SKQ201713S,,2.45,144,Tucker,1,B.saida,5,,,
+SKQ201713S,,2.45,144,Tucker,3,B.saida,12,,,
+SKQ201713S,,2.45,144,Bongo,150,B.saida,3,,,
+SKQ201713S,,2.45,144,Bongo,500,B.saida,1,,,
+SKQ201713S,,2.3,146,Tucker,3,B.saida,2,,,
+SKQ201713S,,2.3,146,Tucker,1,B.saida,4,,,
+SKQ201713S,,7.2,149,Tucker,3,B.saida,2,,,
+SKQ201713S,,7.35,151,Tucker,all,B.saida,4,,,Cast 1- didn't trigger right so all nets together
+SKQ201713S,,7.35,151,Tucker,1,B.saida,1,,,Cast 2
+SKQ201713S,,7.35,151,Tucker,2,B.saida,1,,,Cast 2; Big!
+SKQ201713S,,7.35,151,Tucker,3,B.saida,1,,,Cast 2
+SKQ201713S,,7.6,154,Tucker,1,B.saida,17,,,
+SKQ201713S,,7.6,154,Tucker,3,B.saida,10,,,Stn 154 TT3 and TT2 in same bag
+SKQ201713S,,7.6,154,Tucker,2,B.saida,1,,,Stn 154 TT3 and TT2 in same bag; the one from net 2 was on the larger side
+SKQ201713S,,7.8,156,Tucker,3,B.saida,3,,,only 1 TT net at this station; bag label says net 1 but net 3 is correct
+SKQ201713S,,7.10,158,Tucker,3,B.saida,8,,,only 1 TT net at this station
+SKQ201713S,,3.45,165,Ring,,B.saida,3,,,Label says 166
+SKQ201713S,,3.45,165,Tucker,2,B.saida,1,,,Label says 166
+SKQ201713S,,3.45,165,Tucker,3,B.saida,3,,,Label says 166
+SKQ201713S,,DBO 6.4,168,Bongo,150,B.saida,3,,,
+SKQ201713S,,DBO 6.4,168,Bongo,500,B.saida,1,,,
+SKQ201713S,,DBO 6.1,171,Bongo,150,B.saida,15,,,
+SKQ201713S,,DBO 6.1,171,Bongo,500,B.saida,6,,,
+SKQ201713S,,WDD1,172,Tucker,1,B.saida,32,,,
+SKQ201713S,,WDD1,172,Tucker,3,B.saida,22,,,
+SKQ201713S,,WDD3,174,Tucker,1,B.saida,2,,,
+SKQ201713S,,WDD3,174,Tucker,2,B.saida,2,,,
+SKQ201713S,,WDD3,174,Tucker,3,B.saida,16,,,
+SKQ201713S,,WDD5,176,Tucker,1,B.saida,1,,,
+SKQ201713S,,WDD5,176,Tucker,3,B.saida,1,,,
+SKQ201713S,,WDD3,174.1,Tucker,3,B.saida,5,,,
+SKQ201713S,,WDD3,174.1,Tucker,2,B.saida,13,,,
+SKQ201713S,,WDD6,177,Tucker,1,B.saida,6,,,
+SKQ201713S,,WDD6,177,Tucker,2,B.saida,3,,,
+SKQ201713S,,WDD6,177,Tucker,3,B.saida,6,,,
+SKQ201713S,,WDD8,179,Tucker,3,B.saida,5,,,
+SKQ201713S,,WDD8,179,Tucker,1,B.saida,31,,,
+SKQ201713S,,WDD8,179,Tucker,2,B.saida,9,,,
+SKQ201713S,,WDD9,180,Tucker,3,B.saida,3,,,
+SKQ201713S,,WDD9,180,Tucker,1,B.saida,33,,,
+SKQ201713S,,WDD9,180,Tucker,2,B.saida,54,,,
+SKQ201713S,,ZZ15,182,Tucker,1,B.saida,2,,,
+SKQ201713S,,ZZ15,182,Tucker,3,B.saida,7,,,
