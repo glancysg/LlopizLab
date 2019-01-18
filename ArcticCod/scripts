@@ -1,1 +1,368 @@
+install.packages('shapeR')
+library(shapeR)
 
+# get image files into appropriate folders
+current_folder <- "/Users/helena.mcmonagle/Desktop/otolith images/Originals"
+new_folder <- "/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/arctic_cod_otoliths/Fixed/left_lapilli"
+otolith_by_type_file <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/arctic_cod_otoliths/otolith_images_by_type.csv")
+table(otolith_by_type_file$Station)
+left_lapilli <- as.character(otolith_by_type_file$Left_lapillus)
+file.copy(file.path(current_folder,left_lapilli), new_folder)
+# note: since fewer images, moved files for Run_2 into appropriate folderes manually. 
+# Run_2 = images that did not outline correctly the first time I ran ShapeR.
+
+#fix datasheet so that each column contains information for a unique image file
+picnames_station_ID <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/arctic_cod_otoliths/right_lapillus_fish_ID_and_station.csv")
+picnames <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/arctic_cod_otoliths/right_lapillus.csv")
+right_lapillus_images <- merge(picnames, picnames_station_ID, by="Right_lapillus", all.x = TRUE)
+View(right_lapillus_images)
+library(xlsx)
+write.xlsx(right_lapillus_images, file = "/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/arctic_cod_otoliths/All_otoliths.xlsx", sheetName = "right_lapillus", append = TRUE)
+
+# to look at shape, use @ not $ because it's an object not a data frame
+# tried .5 and no shape was found
+# tried .1 and the threshold was too low--the line picked up dust and made false outer boundaries. 
+# mouse.click doesn't work great: instead try to get cleaner (or well-edited) images to avoid this
+# next, trying theshold .2 -- did not work first time for image 1. left only a red dot in the middle of the otolith.
+# also gave error that "the otolith is possibly not in the center of the image." 
+# edited photos: placed black squares over dust particles. 
+# do not crop image to get otolith in center, or else scale bar would change
+# went back to using mouse.click--just click in center of otolith once it prompts you
+# This worked! > shape=detect.outline(shape, threshold = .2, write.outline.w.org = TRUE, mouse.click = TRUE)
+
+
+# 5 Oct: delete images from Fixed, Original, and Original with Outline folders that did not work well:
+#change wd, and .png vs .JPG, depending on which files I'm removing.
+
+#remove old files that didn't have good outlines, and add length_cm (standards length)
+setwd("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/ShapeAnalysis")
+file.remove("IMG_4517.png", "IMG_4531.png", "IMG_4574.png", "IMG_4630.png", "IMG_4787.png", "IMG_4907.png")
+length_cm <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/for_length_cm.csv")
+All_otoliths <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/arctic_cod_otoliths/All_otoliths.csv")
+View(length_cm)
+View(All_otoliths)
+All_otoliths_with_length <- merge(All_otoliths, length_cm, by="Fish_ID", all.x = TRUE)
+View(All_otoliths_with_length)
+library(xlsx)
+setwd("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/ShapeAnalysis")
+write.xlsx(All_otoliths_with_length, file = "/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/arctic_cod_otoliths/All_otoliths.xlsx", sheetName = "with_length_cm", append = TRUE)
+
+# Replaced "FISH.csv" with this new csv that includes length_cm and cal
+FISH <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Otolith analysis/ShapeAnalysis/FISH.csv")
+View(FISH)
+
+# continue with instructions. Doesn't recognize "shape"?
+# had to re-run shapeR outline analysis, but did with "FALSE" so that it wouldn't re-write files already done  (much faster)
+
+shape=shapeR("/Users/helena.mcmonagle/Desktop/Llopiz lab/Arctic project/Otolith analysis/ShapeAnalysis", "FISH.csv")
+FISH <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz lab/Arctic project/Otolith analysis/ShapeAnalysis/FISH.csv")
+
+shape_smooth <- smoothout(shape, n = 100) # optional. Performed this on outline files. 
+shape=detect.outline(shape, threshold = .2, write.outline.w.org = FALSE) # did after fixing file to include folder name and pop
+View(shape)
+shape = generateShapeCoefficients(shape)
+shape = enrich.master.list(shape) # no error message!
+save(shape,file = "Arctic_cod_Oct_8.RData")
+measurements <- getMeasurements(shape)
+View(measurements)
+View(FISH)
+View(shape)
+shape@outline.list.org
+library(xlsx)
+
+
+tapply(getMeasurements(shape)$otolith.area, getMasterlist(shape)$pop, mean)
+#left_lapilli  left_sagittae  right_lapilli right_sagittae 
+#0.05096024     0.37354005     0.05081052     0.37187072 
+# left and right have very similar areas (should compare left vs right within each fish next)
+# if anything, seems like left sides are (not significantly) larger so use these in age/increment width analysis
+
+tapply(getMeasurements(shape)$otolith.area, getMasterlist(shape)$Station, mean)
+#75        82       138       142       144 
+#0.2285936 0.1688445 0.2230665 0.2138099 0.2246624 
+
+write.xlsx(measurements, file = "/Users/helena.mcmonagle/Desktop/Llopiz Lab/Arctic project/Data sheets/Stats_data.xlsx", sheetName = "measurements", append = TRUE)
+# note that lengths, areas, and perimeters for each outlined otolith in "measurements" are listed in order of otolith type (folders ie left_lapilli), then image file
+# see Stats_data for all data in FISH.csv plus "measurements" data
+
+# # # 
+
+# check for normality in otolith data (if normally distributed, can do parametric test)
+install.packages("dplyr")
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("kassambara/ggpubr")
+library("dplyr")
+library("ggpubr")
+all_sagitta_data <- read.csv("/Users/helena.mcmonagle/Desktop/Llopiz Lab/R/RNA_DNA_Ratios/data/all_shape_r_sagitta_data.csv")
+View(all_sagitta_data)
+
+library("ggpubr")
+ggdensity(all_sagitta_data$otolith.area, 
+          main = "Density plot of sagitta area",
+          xlab = "sagitta_area")
+# distribution is slightly skewed right
+shapiro.test(all_sagitta_data$otolith.area)
+# results (p = 1.233e-06, so p<0.05) show that distribution is NOT normal. Use non-parametric test (Wilcoxon test).
+# Would have to use non-parametric when publishing. But realistically, since sample size is so high,
+# results from Wilcoxon test will likely be the same as the (parametric) paired t test.
+
+# Wilcoxon test for sagittae areas to determine whether left and right sagitta areas are different:
+# Get summary statistics
+library("dplyr")
+group_by(all_sagitta_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.area, na.rm = TRUE),
+    IQR = IQR(otolith.area, na.rm = TRUE))
+
+# Wilcoxon test
+# subset weight data after treatment
+LS <- subset(all_sagitta_data,  Otolith == "LS", otolith.area,
+             drop = TRUE)
+RS <- subset(all_sagitta_data,  Otolith == "RS", otolith.area,
+             drop = TRUE)
+res <- wilcox.test(LS, RS, paired = TRUE)
+res
+#print the p value
+res$p.value
+# since p value = 0.2573489 and is >0.05, the two paired means (left and right sagittae) are not statistically different.
+
+# # #
+
+# Now, see whether length, width, and perimeter of sagittae are different between LS and RS. 
+# check for normality in lengths:
+
+ggdensity(all_sagitta_data$otolith.length, 
+          main = "Density plot of sagitta length",
+          xlab = "sagitta_length")
+# distribution is slightly skewed right
+shapiro.test(all_sagitta_data$otolith.length)
+# results (p = 0.05407, so p>0.05) show that distribution IS normal. Use paired t test (parametric).
+
+# Get summary statistics
+group_by(all_sagitta_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.length, na.rm = TRUE),
+    IQR = IQR(otolith.length, na.rm = TRUE))
+
+# paired t test
+# subset weight data after treatment
+LS <- subset(all_sagitta_data,  Otolith == "LS", otolith.length,
+             drop = TRUE)
+RS <- subset(all_sagitta_data,  Otolith == "RS", otolith.length,
+             drop = TRUE)
+res <- t.test(LS, RS, paired = TRUE)
+res
+#print the p value
+res$p.value
+# p = 0.379023
+# since p value is >0.05, the two paired means (left and right sagittae) are NOT statistically different.
+
+# # #
+
+# check for normality in widths:
+
+ggdensity(all_sagitta_data$otolith.width, 
+          main = "Density plot of sagitta width",
+          xlab = "sagitta_width")
+# distribution is slightly skewed right
+shapiro.test(all_sagitta_data$otolith.width)
+# results (p = 0.0954, so p>0.05) show that distribution IS normal. Use paired t test (parametric).
+
+# Get summary statistics
+group_by(all_sagitta_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.width, na.rm = TRUE),
+    IQR = IQR(otolith.width, na.rm = TRUE))
+
+# paired t test
+# subset weight data after treatment
+LS <- subset(all_sagitta_data,  Otolith == "LS", otolith.width,
+             drop = TRUE)
+RS <- subset(all_sagitta_data,  Otolith == "RS", otolith.width,
+             drop = TRUE)
+res <- t.test(LS, RS, paired = TRUE)
+res
+#print the p value
+res$p.value
+# p = 0.002230046
+# since p value is <0.05, the two paired means (left and right sagittae) ARE statistically different.
+# However, this is likely due to widths measuring a different part in lobes on the top and bottom of
+# each sagitta (normal to the longest axis). This difference is likely due to differences in otolith
+# shape, not otolith size, and if anything is just another indicator that sagittae will not be the best 
+# choice for increment width (but it does not indicate that left and right sagittae are different size)
+
+# # #
+
+# check for normality in perimeters:
+
+ggdensity(all_sagitta_data$otolith.perimeter, 
+          main = "Density plot of sagitta perimeter",
+          xlab = "sagitta_perimeter")
+# distribution is slightly skewed right, and bimodal
+shapiro.test(all_sagitta_data$otolith.perimeter)
+# results (p = 0.007322, so p<0.05) show that distribution is NOT normal. Use Wilcoxon test (non-parametric)
+
+# Get summary statistics
+group_by(all_sagitta_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.perimeter, na.rm = TRUE),
+    IQR = IQR(otolith.perimeter, na.rm = TRUE))
+
+# paired t test
+# subset weight data after treatment
+LS <- subset(all_sagitta_data,  Otolith == "LS", otolith.perimeter,
+             drop = TRUE)
+RS <- subset(all_sagitta_data,  Otolith == "RS", otolith.perimeter,
+             drop = TRUE)
+res <- wilcox.test(LS, RS, paired = TRUE)
+res
+#print the p value
+res$p.value
+# p = 0.175588
+# since p value is >0.05, the two paired means (left and right sagittae) are not statistically different
+
+# # #
+
+# Now, Determine whether left and right lapillus areas, lengths, widths, and perimeters are different between left and right. 
+all_lapillus_data <- read.csv ("/Users/helena.mcmonagle/Desktop/Llopiz Lab/R/RNA_DNA_Ratios/data/all_shape_r_lapillus_data.csv")
+View(all_lapillus_data)
+
+# Check for normality of lapillus areas
+ggdensity(all_lapillus_data$otolith.area, 
+          main = "Density plot of lapillus area",
+          xlab = "lapillus_area")
+# distribution is slightly skewed right
+shapiro.test(all_lapillus_data$otolith.area)
+
+# results (p = .001399, so p<0.05) show that distribution is NOT normal. Use non-parametric test (Wilcoxon test).
+
+# Get summary statistics
+library("dplyr")
+group_by(all_lapillus_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.area, na.rm = TRUE),
+    IQR = IQR(otolith.area, na.rm = TRUE))
+
+# Wilcoxon test
+# subset weight data after treatment
+LL <- subset(all_lapillus_data,  Otolith == "LL", otolith.area,
+             drop = TRUE)
+RL <- subset(all_lapillus_data,  Otolith == "RL", otolith.area,
+             drop = TRUE)
+res <- wilcox.test(LL, RL, paired = TRUE)
+res
+#print the p value
+res$p.value
+# since p value is 0.5177172 and >0.05, the two paired means (left and right sagittae) are not statistically different.
+
+# # #
+
+# Check for normality of lapillus lengths
+ggdensity(all_lapillus_data$otolith.length, 
+          main = "Density plot of lapillus length",
+          xlab = "lapillus_length")
+# distribution is not strongly skewed, but slightly bimodal (one maximum is very small)
+shapiro.test(all_lapillus_data$otolith.length)
+# results (p = .05336, so p>0.05) show that distribution is normal. Use paired t test. 
+
+# Get summary statistics
+library("dplyr")
+group_by(all_lapillus_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.length, na.rm = TRUE),
+    IQR = IQR(otolith.length, na.rm = TRUE))
+
+# paired t test
+LL <- subset(all_lapillus_data,  Otolith == "LL", otolith.length,
+             drop = TRUE)
+RL <- subset(all_lapillus_data,  Otolith == "RL", otolith.length,
+             drop = TRUE)
+res <- t.test(LL, RL, paired = TRUE)
+res
+#print the p value
+res$p.value
+# since p value is 0.7619989 and is >0.05, the two paired means (left and right lapilli) are not statistically different.
+
+# # #
+
+# Check for normality of lapillus width
+ggdensity(all_lapillus_data$otolith.width, 
+          main = "Density plot of lapillus width",
+          xlab = "lapillus_width")
+# distribution is not strongly skewed, looks normal
+shapiro.test(all_lapillus_data$otolith.width)
+# results (p = .4613, so p>0.05) show that distribution is normal. Use paired t test. 
+
+# Get summary statistics
+library("dplyr")
+group_by(all_lapillus_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.width, na.rm = TRUE),
+    IQR = IQR(otolith.width, na.rm = TRUE))
+
+# paired t test
+LL <- subset(all_lapillus_data,  Otolith == "LL", otolith.width,
+             drop = TRUE)
+RL <- subset(all_lapillus_data,  Otolith == "RL", otolith.width,
+             drop = TRUE)
+res <- t.test(LL, RL, paired = TRUE)
+res
+#print the p value
+res$p.value
+# since p value is 0.2221485 and is >0.05, the two paired means (left and right lapilli) are not statistically different.
+
+# # #
+
+# Check for normality of lapillus perimeter
+ggdensity(all_lapillus_data$otolith.perimeter, 
+          main = "Density plot of lapillus perimeter",
+          xlab = "lapillus_perimeter")
+# distribution is not strongly skewed, but is not quite unimodal 
+shapiro.test(all_lapillus_data$otolith.perimeter)
+# results (p = .05679, so p>0.05) show that distribution is normal. Use t test.
+
+# Get summary statistics
+library("dplyr")
+group_by(all_lapillus_data, Otolith) %>%
+  summarise(
+    count = n(),
+    median = median(otolith.perimeter, na.rm = TRUE),
+    IQR = IQR(otolith.perimeter, na.rm = TRUE))
+
+# paired t test
+LL <- subset(all_lapillus_data,  Otolith == "LL", otolith.perimeter,
+             drop = TRUE)
+RL <- subset(all_lapillus_data,  Otolith == "RL", otolith.perimeter,
+             drop = TRUE)
+res <- t.test(LL, RL, paired = TRUE)
+res
+#print the p value
+res$p.value
+# since p value is 0.434053 and is >0.05, the two paired means (left and right lapilli) are not statistically different.
+
+# # #
+
+# In summary, differences between dimensions of the left and right sagittae, and then left and right lapilli 
+# were measured using a paired t test when distributions were normal and a Wilcoxon test when distributions were not normal. 
+# Results found that there were no statistical differences in any of the dimension (area, length, width, or perimeter)
+# between the left and right sagittae or between the left and right lapilli, with the exception of sagittal width. 
+# These were likely variable between left and right sides due to highly variable lobes along the longest sides of the sagittae,
+# which could have resulted in very different widths, while lengths did not vary (lobes did not extend from shortest sides/along longest axis of sagittae)
+
+#Summary: 
+# sagitta area: Wilcoxon test. p = 0.2573489
+# sagitta length: t-test. p = 0.379023
+# sagitta width: t-test. p = 0.002230046**
+# sagitta perimeter: Wilcoxon test. p = 0.175588 (note: a t-test comes up with statistically diff means, but Wilcoxon does not)
+
+# lapillus area: Wilcoxon test. p = 0.5177172 
+# lapillus length: t-test. p = 0.7619989
+# lapillus width: t-test. p = 0.2221485
+# lapillus perimeter: t-test. p = 0.434053
